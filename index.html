@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Hoşgeldiniz</title>
+    <style>
+        /* Sayfanın tüm yüksekliğini kaplaması için */
+        body, html {
+            height: 100%;
+            margin: 0;
+        }
+
+        /* İçeriği ortalamak için flexbox kullanımı */
+        .centered {
+            display: flex;
+            justify-content: center; /* Yatayda ortalar */
+            align-items: center;    /* Dikeyde ortalar */
+            height: 100%;
+            background-color: #f0f0f0; /* İsteğe bağlı arka plan rengi */
+        }
+
+        /* Yazı stilini belirlemek için */
+        .centered h1 {
+            font-size: 72px;        /* Büyük yazı boyutu */
+            color: #333;            /* Yazı rengi */
+            font-family: Arial, sans-serif; /* Yazı tipi */
+        }
+    </style>
+</head>
+<body>
+    <div class="centered">
+        <h1>HELLO WORLD</h1>
+    </div>
+</body>
+</html>
