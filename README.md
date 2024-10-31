@@ -1,6 +1,6 @@
 # Frost Samurai
 
-TODO
+>TODO
 
 ## Proje Detayları
 
@@ -20,11 +20,13 @@ TODO
 
 ### 2. Hafta
 
->TODO
+- SWOT analizi tamamlandı.
+
+- Gereksinim analizine başlanıldı.
 
 ### 3. Hafta
 
-TODO
+>TODO
 
 ### 4. Hafta
 
@@ -52,8 +54,8 @@ TODO
 
 - **E-posta:** mulosbron@gmail.com
 
-- **Web Sitesi:** [Frost Samurai](frostsamurai.com)
+- **Web Sitesi:** [Frost Samurai](https://frostsamurai.com/)
 
 ## Kaynakça
 
-- **TODO**
+>TODO
