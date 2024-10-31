@@ -1,1 +1,1 @@
-![SWOT](https://lcqms7fn2kcc4ygl52ikw75j66mbgpa5if56yvmbbvjjxln356oq.arweave.net/WKDJfK3ShC5gy-6Qq3-p95gTPB1Be-xVgQ1Sm627750)
+![SWOT](https://seinvgveuxtgq7scdceqc5ubydbkeznuyvyrjmfp4wdlh5koxk4q.arweave.net/kRDamqSl5mh-QhiJAXaBwMKiZbTFcRSwr-WGs_VOurk)
