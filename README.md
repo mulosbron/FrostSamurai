@@ -1,6 +1,6 @@
 # Frost Samurai
 
->TODO
+Android üzerinde çalışan AR temelli, eğitici, çocuklara yönelik bir oyun.
 
 ## Proje Detayları
 
@@ -16,21 +16,28 @@
 
 - [İndirme sayfası](https://frostsamurai.com/) şablonu oluşturuldu.
 
-- SWOT analizine başlanıldı.
 
 ### 2. Hafta
+
+- Akış çizelgesi oluşturuldu.
+
+- SWOT analizine başlanıldı.
+
+
+
+### 3. Hafta
 
 - SWOT analizi tamamlandı.
 
 - Gereksinim analizine başlanıldı.
 
-### 3. Hafta
-
->TODO
 
 ### 4. Hafta
 
->TODO
+- Gereksinim analizi tamamlandı.
+
+- Class ve Use Case diyagramlarına başlanıldı.
+
 
 ### 5. Hafta
 
