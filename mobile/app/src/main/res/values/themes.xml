@@ -1,9 +1,24 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.FrostSamurai" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+
+    <!-- Temel Uygulama Teması -->
+    <style name="Theme.FrostSamurai" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Birincil Renkler -->
+        <item name="colorPrimary">@color/deep_blue</item>
+        <item name="colorPrimaryVariant">@color/blue</item>
+        <item name="colorOnPrimary">@color/pale_blue</item>
+
+        <!-- İkincil Renkler -->
+        <item name="colorSecondary">@color/light_blue</item>
+        <item name="colorOnSecondary">@color/sky_blue</item>
+
+        <!-- Arka Plan ve Yüzey Renkleri -->
+        <item name="android:colorBackground">@color/pale_blue</item>
+        <item name="colorSurface">@color/sky_blue</item>
+        <item name="colorOnSurface">@color/deep_blue</item>
+
+        <!-- Durum Çubuğu -->
+        <item name="android:statusBarColor" >?attr/colorPrimary</item>
+        <item name="android:navigationBarColor">?attr/colorPrimary</item>
     </style>
 
-    <style name="Theme.FrostSamurai" parent="Base.Theme.FrostSamurai" />
 </resources>

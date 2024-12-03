@@ -1,4 +1,4 @@
-package com.mulosbron.frostsamurai
+package com.xperiencelabs.frostsamurai
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -19,6 +19,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("com.mulosbron.frostsamurai", appContext.packageName)
+        assertEquals("com.xperiencelabs.arapp", appContext.packageName)
     }
 }

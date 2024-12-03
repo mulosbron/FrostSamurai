@@ -1,3 +1,29 @@
 <resources>
+    <!-- App name -->
     <string name="app_name">FrostSamurai</string>
+
+    <!-- Login screen strings -->
+    <string name="email_hint">Enter your email</string>
+    <string name="pwd">Enter your password</string>
+    <string name="forgot_pwd">Forgot your password?</string>
+    <string name="login">Log In</string>
+    <string name="signup_prompt">Don\'t have an account? Sign up</string>
+
+    <!-- Register screen strings -->
+    <string name="confirm_pwd">Re-enter your password</string>
+    <string name="signup">Sign Up</string>
+    <string name="login_prompt">Already have an account? Log in</string>
+
+    <!-- AR screen strings -->
+    <string name="place">Place</string>
+
+    <!-- General error and success messages -->
+    <string name="fill_fields">Please fill in all fields</string>
+    <string name="password_mismatch">Passwords do not match</string>
+    <string name="registration_success">Registration successful</string>
+    <string name="login_failed">Login failed</string>
+    <string name="user_not_found">User not found</string>
+    <string name="welcome">Welcome!</string>
+    <string name="score_0">Score: 0</string>
+    <string name="lives_3">Lives: 3</string>
 </resources>

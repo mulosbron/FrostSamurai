@@ -1,4 +1,4 @@
-package com.mulosbron.frostsamurai
+package com.xperiencelabs.frostsamurai
 
 import org.junit.Test
 
