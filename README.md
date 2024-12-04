@@ -18,38 +18,39 @@ Android üzerinde çalışan AR temelli, eğitici, çocuklara yönelik bir oyun.
 
 ### 2. Hafta
 
-- Akış çizelgesi oluşturuldu.
+- [Akış çizelgesi](https://github.com/mulosbron/FrostSamurai/blob/main/docs/uml%20diyagramlar%C4%B1/aktivite%20diyagram%C4%B1.png) oluşturuldu.
 
 - SWOT analizine başlanıldı.
 
 ### 3. Hafta
 
-- SWOT analizi tamamlandı.
+- [SWOT analizi](https://github.com/mulosbron/FrostSamurai/blob/main/docs/swot/swot%20analizi.png) tamamlandı.
 
 - Gereksinim analizine başlanıldı.
 
 ### 4. Hafta
 
-- Gereksinim analizi tamamlandı.
+- [Gereksinim analizi](https://github.com/mulosbron/FrostSamurai/blob/main/docs/gereksinim%20analizi/gereksinim%20analizi.pdf) tamamlandı.
 
 - Diyagram çizimine başlandı.
 
 ### 5. Hafta
 
-- Diyagram çizimi büyük oranda tamamlandı.
+- [Diyagram](https://github.com/mulosbron/FrostSamurai/tree/main/docs/uml%20diyagramlar%C4%B1) çizimi büyük oranda tamamlandı.
 
 ### 6. Hafta
 
-- Login ve Register fragmentleri eklendi.
+- [Login ve Register](https://github.com/mulosbron/FrostSamurai/tree/main/mobile/app/src/main/java/com/mulosbron/frostsamurai) fragmentleri eklendi.
 
 ### 7. Hafta
 
->AR kotlanmasına başlanıldı.
+- [AR](https://github.com/mulosbron/FrostSamurai/blob/main/mobile/app/build/outputs/apk/debug/app-debug.apk) kodlanmasına başlanıldı.
 
 ## Ekran Görüntüleri
 
->TODO
+![görsel](https://3g2o5sqgabwkc5iqa7fol5s4pmrddgah3w3g2a2swvahhgkp32qq.arweave.net/2bTuygYAbKF1EAfK5fZceyIxmAfdtm0DUrVAc5lP3qE)
 
+![gif](https://a3e6oeowiiyedywgfnzt5juhihrbenzqmeabnzqhp64emgf53vja.arweave.net/BsnnEdZCMEHixitzPqaHQeISNzBhABbmB3-4Rhi93VI)
 ## İletişim
 
 - **Geliştirici:** mulosbron
@@ -68,3 +69,6 @@ Android üzerinde çalışan AR temelli, eğitici, çocuklara yönelik bir oyun.
 
 - [Diyagram Çizimi](https://plantuml.com/)
 
+- [AR](https://github.com/princeku07/AR-Furniture) 
+
+- [SHA256](https://developer.android.com/reference/java/security/MessageDigest)
