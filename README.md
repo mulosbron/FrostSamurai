@@ -48,9 +48,11 @@ Android üzerinde çalışan AR temelli, eğitici, çocuklara yönelik bir oyun.
 
 ## Ekran Görüntüleri
 
-![görsel](https://3g2o5sqgabwkc5iqa7fol5s4pmrddgah3w3g2a2swvahhgkp32qq.arweave.net/2bTuygYAbKF1EAfK5fZceyIxmAfdtm0DUrVAc5lP3qE)
+<img width="500" alt="Ekran görüntüsü 2024-12-04 212545" src="https://github.com/user-attachments/assets/b54b698f-f88d-4043-ad89-4d566fdf68f3">
 
-![gif](https://a3e6oeowiiyedywgfnzt5juhihrbenzqmeabnzqhp64emgf53vja.arweave.net/BsnnEdZCMEHixitzPqaHQeISNzBhABbmB3-4Rhi93VI)
+![Screen_Recording_20241204_213117_FrostSamurai-ezgif com-optimize](https://github.com/user-attachments/assets/06a3669f-8a30-428a-8120-b9b82a48cd80)
+
+
 ## İletişim
 
 - **Geliştirici:** mulosbron
