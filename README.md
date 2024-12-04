@@ -32,7 +32,7 @@ Android üzerinde çalışan AR temelli, eğitici, çocuklara yönelik bir oyun.
 
 - Gereksinim analizi tamamlandı.
 
-- Diyagram çizimine başlandı
+- Diyagram çizimine başlandı.
 
 ### 5. Hafta
 
@@ -40,11 +40,11 @@ Android üzerinde çalışan AR temelli, eğitici, çocuklara yönelik bir oyun.
 
 ### 6. Hafta
 
->TODO
+- Login ve Register fragmentleri eklendi.
 
 ### 7. Hafta
 
->TODO
+>AR kotlanmasına başlanıldı.
 
 ## Ekran Görüntüleri
 

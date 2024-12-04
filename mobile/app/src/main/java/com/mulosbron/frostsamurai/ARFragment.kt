@@ -1,27 +1,33 @@
 package com.mulosbron.frostsamurai
 
-import android.media.MediaPlayer
+import android.annotation.SuppressLint
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isGone
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.google.ar.core.Config
-import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import io.github.sceneview.ar.ArSceneView
 import io.github.sceneview.ar.node.ArModelNode
-import io.github.sceneview.ar.node.PlacementMode
 import io.github.sceneview.math.Position
-import io.github.sceneview.node.VideoNode
+import io.github.sceneview.node.Node
+import kotlin.random.Random
 
 class ARFragment : Fragment() {
 
     private lateinit var sceneView: ArSceneView
-    private lateinit var placeButton: ExtendedFloatingActionButton
     private lateinit var modelNode: ArModelNode
-    private lateinit var videoNode: VideoNode
-    private lateinit var mediaPlayer: MediaPlayer
+    private lateinit var modelNodeNonSymmetric: ArModelNode
+    private lateinit var scoreTextView: TextView
+    private lateinit var livesTextView: TextView
+    private lateinit var gameOverTextView: TextView
+    private var score = 0
+    private var lives = 3
+    private val handler = Handler(Looper.getMainLooper())
+    private val random = Random(System.currentTimeMillis())
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,54 +44,146 @@ class ARFragment : Fragment() {
             this.lightEstimationMode = Config.LightEstimationMode.DISABLED
         }
 
-        mediaPlayer = MediaPlayer.create(requireContext(), R.raw.ad)
+        scoreTextView = view.findViewById(R.id.scoreTextView)
+        livesTextView = view.findViewById(R.id.livesTextView)
+        gameOverTextView = view.findViewById(R.id.gameOverTextView)
+        gameOverTextView.visibility = View.GONE
 
-        placeButton = view.findViewById(R.id.place)
+        updateScore()
+        updateLives()
 
-        placeButton.setOnClickListener {
-            placeModel()
+        setupModels()
+        startAnimation()
+
+        sceneView.onTap = { _, node, _ ->
+            handleTap(node)
         }
+    }
 
-        videoNode = VideoNode(
-            sceneView.engine,
-            scaleToUnits = 0.7f,
-            centerOrigin = Position(y = -4f),
-            glbFileLocation = "models/tree_branch.glb",
-            player = mediaPlayer,
-            onLoaded = { _, _ -> mediaPlayer.start() }
-        )
-
-        modelNode = ArModelNode(sceneView.engine, PlacementMode.INSTANT).apply {
+    private fun setupModels() {
+        modelNode = ArModelNode(sceneView.engine).apply {
             loadModelGlbAsync(
                 glbFileLocation = "models/snowflake.glb",
-                scaleToUnits = 1f,
-                centerOrigin = Position(-0.5f)
-            ) {
-                sceneView.planeRenderer.isVisible = true
-                //val materialInstance = it.materialInstances[0]
-            }
+                scaleToUnits = 2.0f,
+                centerOrigin = Position(0f, 0f, 0f)
+            )
+            isVisible = false
+        }
 
-            onAnchorChanged = {
-                placeButton.isGone = it != null
-            }
+        modelNodeNonSymmetric = ArModelNode(sceneView.engine).apply {
+            loadModelGlbAsync(
+                glbFileLocation = "models/tree_branch.glb",
+                scaleToUnits = 1.5f,
+                centerOrigin = Position(0f, 0f, 0f)
+            )
+            isVisible = false
         }
 
         sceneView.addChild(modelNode)
-        modelNode.addChild(videoNode)
+        sceneView.addChild(modelNodeNonSymmetric)
     }
 
-    private fun placeModel() {
-        modelNode.anchor()
-        sceneView.planeRenderer.isVisible = false
+    private fun startAnimation() {
+        spawnObjects()
+
+        handler.postDelayed(object : Runnable {
+            override fun run() {
+                moveObjects()
+                handler.postDelayed(this, 50)
+            }
+        }, 50)
+
+        handler.postDelayed(object : Runnable {
+            override fun run() {
+                respawnObjects()
+                handler.postDelayed(this, 3000)
+            }
+        }, 3000)
     }
 
-    override fun onPause() {
-        super.onPause()
-        mediaPlayer.pause()
+    private fun spawnObjects() {
+        val randomValue = random.nextInt(100)
+        if (randomValue < 70) {
+            modelNode.isVisible = true
+            modelNodeNonSymmetric.isVisible = false
+            setPositionRandomly(modelNode)
+        } else {
+            modelNode.isVisible = false
+            modelNodeNonSymmetric.isVisible = true
+            setPositionRandomly(modelNodeNonSymmetric)
+        }
+    }
+
+    private fun respawnObjects() {
+        modelNode.isVisible = false
+        modelNodeNonSymmetric.isVisible = false
+
+        handler.postDelayed({
+            spawnObjects()
+        }, 500)
+    }
+
+    private fun moveObjects() {
+        if (modelNode.isVisible) {
+            moveNodeRandomly(modelNode)
+        }
+        if (modelNodeNonSymmetric.isVisible) {
+            moveNodeRandomly(modelNodeNonSymmetric)
+        }
+    }
+
+    private fun moveNodeRandomly(node: ArModelNode) {
+        val deltaX = (random.nextFloat() - 0.5f) * 0.02f
+        val deltaY = (random.nextFloat() - 0.5f) * 0.02f
+        val deltaZ = (random.nextFloat() - 0.5f) * 0.02f
+
+        val currentPosition = node.position
+        node.position = Position(
+            currentPosition.x + deltaX,
+            currentPosition.y + deltaY,
+            currentPosition.z + deltaZ
+        )
+    }
+
+    private fun setPositionRandomly(node: ArModelNode) {
+        val x = (random.nextFloat() - 0.5f) * 2f
+        val y = (random.nextFloat() - 0.5f) * 2f
+        val z = -random.nextFloat() * 2f - 1f
+
+        node.position = Position(x, y, z)
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun handleTap(node: Node?) {
+        if (node == modelNode && modelNode.isVisible) {
+            score += 10
+            updateScore()
+            modelNode.isVisible = false
+        } else if (node == modelNodeNonSymmetric && modelNodeNonSymmetric.isVisible) {
+            lives -= 1
+            updateLives()
+            modelNodeNonSymmetric.isVisible = false
+
+            if (lives <= 0) {
+                handler.removeCallbacksAndMessages(null)
+                gameOverTextView.visibility = View.VISIBLE
+                gameOverTextView.text = "Oyun Bitti\nSkorunuz: $score"
+                scoreTextView.visibility = View.GONE
+                livesTextView.visibility = View.GONE
+            }
+        }
+    }
+
+    private fun updateScore() {
+        scoreTextView.text = getString(R.string.score_text, score)
+    }
+
+    private fun updateLives() {
+        livesTextView.text = getString(R.string.lives_text, lives)
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        mediaPlayer.release()
+        handler.removeCallbacksAndMessages(null)
     }
 }

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_ar"
+        android:icon="@drawable/ic_ar_camera"
+        android:title="@string/ar" />
+    <item
+        android:id="@+id/nav_market"
+        android:icon="@drawable/ic_market"
+        android:title="Market" />
+    <item
+        android:id="@+id/nav_login"
+        android:icon="@drawable/ic_acc"
+        android:title="Giriş Yap" />
+</menu>
