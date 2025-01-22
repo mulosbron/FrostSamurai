@@ -25,6 +25,7 @@
             android:gravity="center"
             android:paddingTop="16dp">
 
+            <!-- Email Giriş Alanı -->
             <EditText
                 android:id="@+id/etEmail"
                 android:layout_width="match_parent"
@@ -36,6 +37,7 @@
                 android:textColorHint="@color/light_blue"
                 android:backgroundTint="@color/blue" />
 
+            <!-- Şifre Giriş Alanı -->
             <EditText
                 android:id="@+id/etPassword"
                 android:layout_width="match_parent"
@@ -47,6 +49,7 @@
                 android:textColorHint="@color/light_blue"
                 android:backgroundTint="@color/blue" />
 
+            <!-- Şifreyi mi unuttunuz? -->
             <TextView
                 android:id="@+id/tvForgotPassword"
                 android:layout_width="match_parent"
@@ -58,6 +61,7 @@
                 android:textColor="@color/deep_blue"
                 android:textSize="16sp" />
 
+            <!-- Giriş Butonu -->
             <Button
                 android:id="@+id/btnLogin"
                 android:layout_width="match_parent"
@@ -67,6 +71,7 @@
                 android:textColor="@color/pale_blue"
                 android:layout_margin="16dp" />
 
+            <!-- Kayıt Ol Linki -->
             <TextView
                 android:id="@+id/tvRegister"
                 android:layout_width="wrap_content"
@@ -76,6 +81,18 @@
                 android:textSize="16sp"
                 android:gravity="center_horizontal"
                 android:textColor="@color/deep_blue" />
+
+            <!-- Çıkış Yap Butonu (Varsayılan olarak GONE) -->
+            <Button
+                android:id="@+id/btnLogout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/logout"
+                android:backgroundTint="@color/deep_blue"
+                android:textColor="@color/pale_blue"
+                android:layout_margin="16dp"
+                android:visibility="gone" />
+
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,6 +8,7 @@
     <string name="forgot_pwd">Forgot your password?</string>
     <string name="login">Log In</string>
     <string name="signup_prompt">Don\'t have an account? Sign up</string>
+    <string name = "logout">Logout</string>
 
     <!-- Register screen strings -->
     <string name="confirm_pwd">Re-enter your password</string>

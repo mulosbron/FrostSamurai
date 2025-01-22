@@ -1,5 +1,6 @@
 package com.mulosbron.frostsamurai
 
+import android.content.Context
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -15,16 +16,31 @@ class MainActivity : AppCompatActivity() {
 
         bottomNavigationView = findViewById(R.id.bottomNavigationView)
 
-        replaceFragment(ARFragment())
+        // Uygulama ilk açıldığında giriş kontrolü yap
+        if (isLoggedIn()) {
+            // Kullanıcı giriş yaptıysa ARFragment göster
+            replaceFragment(ARFragment())
+        } else {
+            // Giriş yoksa LoginFragment göster
+            replaceFragment(LoginFragment())
+        }
 
         bottomNavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.nav_ar -> {
-                    replaceFragment(ARFragment())
+                    if (isLoggedIn()) {
+                        replaceFragment(ARFragment())
+                    } else {
+                        replaceFragment(LoginFragment())
+                    }
                     true
                 }
                 R.id.nav_market -> {
-                    replaceFragment(MarketFragment())
+                    if (isLoggedIn()) {
+                        replaceFragment(MarketFragment())
+                    } else {
+                        replaceFragment(LoginFragment())
+                    }
                     true
                 }
                 R.id.nav_login -> {
@@ -34,6 +50,18 @@ class MainActivity : AppCompatActivity() {
                 else -> false
             }
         }
+    }
+
+    /**
+     * Yardımcı fonksiyon: Kullanıcı giriş yapmış mı?
+     * SharedPreferences içinde kaydedilmiş email/password var mı diye kontrol eder.
+     */
+    fun isLoggedIn(): Boolean {
+        val sharedPreferences = getSharedPreferences("AppPreferences", Context.MODE_PRIVATE)
+        val savedEmail = sharedPreferences.getString("email", null)
+        val savedPassword = sharedPreferences.getString("password", null)
+        // Eğer email veya password kayıtlı değilse giriş yapılmamış kabul edilir.
+        return !savedEmail.isNullOrEmpty() && !savedPassword.isNullOrEmpty()
     }
 
     fun replaceFragment(fragment: Fragment) {
