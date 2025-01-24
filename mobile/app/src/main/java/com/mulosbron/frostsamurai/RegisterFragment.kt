@@ -1,19 +1,22 @@
 package com.mulosbron.frostsamurai
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 import com.mulosbron.frostsamurai.databinding.FragmentRegisterBinding
-import java.security.MessageDigest
 
 class RegisterFragment : Fragment() {
 
     private var _binding: FragmentRegisterBinding? = null
     private val binding get() = _binding!!
+
+    // FirebaseAuth nesnesi
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -21,16 +24,20 @@ class RegisterFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentRegisterBinding.inflate(inflater, container, false)
+        // FirebaseAuth örneğini al
+        auth = FirebaseAuth.getInstance()
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Kayıt (Sign Up) butonu
         binding.btnSignUp.setOnClickListener {
             performRegister()
         }
 
+        // Zaten hesabın var mı? Giriş ekranına dön
         binding.tvLogin.setOnClickListener {
             (activity as? MainActivity)?.replaceFragment(LoginFragment())
         }
@@ -51,28 +58,36 @@ class RegisterFragment : Fragment() {
             return
         }
 
-        val hashedPassword = hashPassword(password)
+        // Firebase Auth ile kullanıcı oluştur
+        auth.createUserWithEmailAndPassword(email, password)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    // Kayıt başarılı
+                    Toast.makeText(requireContext(), getString(R.string.registration_success), Toast.LENGTH_SHORT).show()
 
-        val sharedPreferences = requireActivity().getSharedPreferences("AppPreferences", Context.MODE_PRIVATE)
-        sharedPreferences.edit()
-            .putString("email", email)
-            .putString("password", hashedPassword)
-            .apply()
+                    // Ek bilgi saklamak isterseniz (ör. score, displayName...), Realtime Database'e yazabilirsiniz:
+                    val userId = auth.currentUser?.uid
+                    val dbRef = FirebaseDatabase.getInstance().getReference("Users")
+                    val userMap = mapOf(
+                        "email" to email,
+                        "score" to 0
+                    )
+                    userId?.let {
+                        dbRef.child(it).setValue(userMap)
+                    }
 
-        Toast.makeText(requireContext(), getString(R.string.registration_success), Toast.LENGTH_SHORT).show()
-
-        (activity as? MainActivity)?.replaceFragment(LoginFragment())
+                    // Kayıt sonrası LoginFragment'e yönlendirme (isterseniz doğrudan ARFragment de yapabilirsiniz)
+                    (activity as? MainActivity)?.replaceFragment(LoginFragment())
+                } else {
+                    // Kayıt başarısız
+                    val message = task.exception?.localizedMessage ?: "Registration failed."
+                    Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+                }
+            }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    private fun hashPassword(password: String): String {
-        val bytes = password.toByteArray()
-        val messageDigest = MessageDigest.getInstance("SHA-256")
-        val digest = messageDigest.digest(bytes)
-        return digest.joinToString("") { "%02x".format(it) }
     }
 }

@@ -1,10 +1,10 @@
 package com.mulosbron.frostsamurai
 
-import android.content.Context
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity() {
 
@@ -16,12 +16,12 @@ class MainActivity : AppCompatActivity() {
 
         bottomNavigationView = findViewById(R.id.bottomNavigationView)
 
-        // Uygulama ilk açıldığında giriş kontrolü yap
+        // Uygulama ilk açıldığında giriş kontrolü
         if (isLoggedIn()) {
-            // Kullanıcı giriş yaptıysa ARFragment göster
+            // Giriş yapılmışsa ARFragment
             replaceFragment(ARFragment())
         } else {
-            // Giriş yoksa LoginFragment göster
+            // Giriş yoksa LoginFragment
             replaceFragment(LoginFragment())
         }
 
@@ -53,15 +53,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     /**
-     * Yardımcı fonksiyon: Kullanıcı giriş yapmış mı?
-     * SharedPreferences içinde kaydedilmiş email/password var mı diye kontrol eder.
+     * Kullanıcı oturum açmış mı?
      */
     fun isLoggedIn(): Boolean {
-        val sharedPreferences = getSharedPreferences("AppPreferences", Context.MODE_PRIVATE)
-        val savedEmail = sharedPreferences.getString("email", null)
-        val savedPassword = sharedPreferences.getString("password", null)
-        // Eğer email veya password kayıtlı değilse giriş yapılmamış kabul edilir.
-        return !savedEmail.isNullOrEmpty() && !savedPassword.isNullOrEmpty()
+        val user = FirebaseAuth.getInstance().currentUser
+        return user != null
     }
 
     fun replaceFragment(fragment: Fragment) {

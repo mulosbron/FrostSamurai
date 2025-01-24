@@ -1,17 +1,14 @@
-plugins {
-    id 'com.android.application'
-    id 'org.jetbrains.kotlin.android'
-}
+// ARApp/app/build.gradle (MODULE BUILD.GRADLE)
+
+// Klasik şekilde plugin'leri apply ediyoruz
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+// Google Services plugin
+apply plugin: 'com.google.gms.google-services'
 
 android {
     namespace 'com.mulosbron.frostsamurai'
     compileSdk 33
-
-    sourceSets {
-        main {
-            jniLibs.srcDirs = ['src/main/jniLibs']
-        }
-    }
 
     defaultConfig {
         applicationId "com.mulosbron.frostsamurai"
@@ -21,6 +18,13 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    // Eğer jniLibs kullanacaksanız
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['src/main/jniLibs']
+        }
     }
 
     buildTypes {
@@ -45,13 +49,25 @@ android {
 }
 
 dependencies {
+    // Android temel kütüphaneler
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.8.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+
+    // Test bağımlılıkları
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
-    // 3D and ARCore
+
+    // ARCore / SceneView
     implementation 'io.github.sceneview:arsceneview:0.10.0'
+
+    // ---- Firebase kütüphaneleri ----
+    // Firebase Auth
+    implementation 'com.google.firebase:firebase-auth:21.1.0'
+    // Firebase Realtime Database (opsiyonel)
+    implementation 'com.google.firebase:firebase-database:20.2.2'
+    // (İsterseniz Firestore)
+    // implementation 'com.google.firebase:firebase-firestore:24.6.2'
 }

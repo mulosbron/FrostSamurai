@@ -1,19 +1,21 @@
 package com.mulosbron.frostsamurai
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.google.firebase.auth.FirebaseAuth
 import com.mulosbron.frostsamurai.databinding.FragmentLoginBinding
-import java.security.MessageDigest
 
 class LoginFragment : Fragment() {
 
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
+
+    // FirebaseAuth
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -21,35 +23,39 @@ class LoginFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
+        auth = FirebaseAuth.getInstance()
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Eğer kullanıcı giriş yaptıysa, login bileşenlerini gizle, logout butonunu göster
-        if ((activity as? MainActivity)?.isLoggedIn() == true) {
+        // Oturum durumu kontrolü
+        if (auth.currentUser != null) {
+            // Kullanıcı giriş yapmışsa Logout arayüzü göster
             showLogoutUI()
         } else {
+            // Kullanıcı giriş yapmamışsa Login arayüzü göster
             showLoginUI()
         }
 
         // "Şifremi Unuttum" tıklaması
         binding.tvForgotPassword.setOnClickListener {
-            // Unutulan şifre ile ilgili ek işlem yapılabilir
+            // Burada Firebase Password Reset akışı ekleyebilirsiniz
+            // auth.sendPasswordResetEmail(kullaniciEmail).addOnSuccessListener { ... }
         }
 
-        // "Giriş Yap" butonuna tıklama
+        // Giriş Yap butonu
         binding.btnLogin.setOnClickListener {
             performLogin()
         }
 
-        // "Kayıt Ol" (Register) tıklaması
+        // Kayıt Ol butonu
         binding.tvRegister.setOnClickListener {
             (activity as? MainActivity)?.replaceFragment(RegisterFragment())
         }
 
-        // "Çıkış Yap" butonu
+        // Çıkış butonu
         binding.btnLogout.setOnClickListener {
             performLogout()
         }
@@ -64,35 +70,30 @@ class LoginFragment : Fragment() {
             return
         }
 
-        val sharedPreferences = requireActivity().getSharedPreferences("AppPreferences", Context.MODE_PRIVATE)
-        val savedEmail = sharedPreferences.getString("email", null)
-        val savedPassword = sharedPreferences.getString("password", null)
-        val hashedPassword = hashPassword(password)
-
-        when {
-            savedEmail == null || savedEmail != email || savedPassword != hashedPassword -> {
-                Toast.makeText(requireContext(), "Email or password does not match.", Toast.LENGTH_SHORT).show()
+        // Firebase Auth ile giriş yap
+        auth.signInWithEmailAndPassword(email, password)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    // Giriş başarılı
+                    Toast.makeText(requireContext(), "Login successful.", Toast.LENGTH_SHORT).show()
+                    // Örnek: ARFragment'a yönlendirebilirsiniz
+                    (activity as? MainActivity)?.replaceFragment(ARFragment())
+                } else {
+                    // Giriş başarısız
+                    val message = task.exception?.localizedMessage ?: "Login failed."
+                    Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+                }
             }
-            else -> {
-                Toast.makeText(requireContext(), "Login successful.", Toast.LENGTH_SHORT).show()
-                // Giriş başarılı olduğuna göre ARFragment'e geçiş
-                (activity as? MainActivity)?.replaceFragment(ARFragment())
-            }
-        }
     }
 
     private fun performLogout() {
-        // SharedPreferences içindeki kullanıcı bilgilerini sil
-        val sharedPreferences = requireActivity().getSharedPreferences("AppPreferences", Context.MODE_PRIVATE)
-        sharedPreferences.edit().clear().apply()
-
-        // Kullanıcıyı tekrar login ekranına dönüp, login bileşenlerini göster
+        auth.signOut()
         Toast.makeText(requireContext(), "Çıkış yapıldı.", Toast.LENGTH_SHORT).show()
         showLoginUI()
     }
 
     private fun showLogoutUI() {
-        // Login bileşenlerini gizle
+        // Giriş bileşenlerini gizle
         binding.etEmail.visibility = View.GONE
         binding.etPassword.visibility = View.GONE
         binding.tvForgotPassword.visibility = View.GONE
@@ -104,7 +105,7 @@ class LoginFragment : Fragment() {
     }
 
     private fun showLoginUI() {
-        // Login bileşenlerini göster
+        // Giriş bileşenlerini göster
         binding.etEmail.visibility = View.VISIBLE
         binding.etPassword.visibility = View.VISIBLE
         binding.tvForgotPassword.visibility = View.VISIBLE
@@ -113,13 +114,6 @@ class LoginFragment : Fragment() {
 
         // Logout butonunu gizle
         binding.btnLogout.visibility = View.GONE
-    }
-
-    private fun hashPassword(password: String): String {
-        val bytes = password.toByteArray()
-        val messageDigest = MessageDigest.getInstance("SHA-256")
-        val digest = messageDigest.digest(bytes)
-        return digest.joinToString("") { "%02x".format(it) }
     }
 
     override fun onDestroyView() {
