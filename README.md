@@ -46,6 +46,21 @@ Android üzerinde çalışan AR temelli, eğitici, çocuklara yönelik bir oyun.
 
 - [AR](https://github.com/mulosbron/FrostSamurai/blob/main/mobile/app/build/outputs/apk/debug/app-debug.apk) kodlanmasına başlanıldı.
 
+### Vize Sonrası
+
+- Login olmadan AR ekranı açılıyordu düzeltildi.
+- Markete göstermelik asimetrik ve simetrik eşya ekleme özelliği eklendi.
+- Gereksinim Analizi revize edildi.
+- Websitesinde değişiklikler yapıldı:
+  - Logo tasarlandı.
+  - Kış temasına uygun pastel tonlar kullanıldı.
+  - Çocuklar ve Ebeveynler için iki kısma ayrıldı.
+  - Web sitesi için mobil uyumluluk eklendi.
+- Uygulama kısmında login/register SharedPref. ile sağlanıyordu. Bunun yerine Firebase veritabanına geçildi. 
+- Mağaza kısmına göstermelik olarak eğitim paketleri eklendi. 
+- Oyun içi para sistemi eklenerek kullanıcının skoruna oranla para kazanması eklendi. 
+- İnstagram ve YouTube sayfaları açıldı. 
+
 ## Ekran Görüntüleri
 
 <img width="500" alt="Ekran görüntüsü 2024-12-04 212545" src="https://github.com/user-attachments/assets/b54b698f-f88d-4043-ad89-4d566fdf68f3">
