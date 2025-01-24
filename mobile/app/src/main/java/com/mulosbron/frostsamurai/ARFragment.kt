@@ -1,6 +1,7 @@
 package com.mulosbron.frostsamurai
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -24,8 +25,10 @@ class ARFragment : Fragment() {
     private lateinit var scoreTextView: TextView
     private lateinit var livesTextView: TextView
     private lateinit var gameOverTextView: TextView
+
     private var score = 0
     private var lives = 3
+
     private val handler = Handler(Looper.getMainLooper())
     private val random = Random(System.currentTimeMillis())
 
@@ -85,14 +88,12 @@ class ARFragment : Fragment() {
 
     private fun startAnimation() {
         spawnObjects()
-
         handler.postDelayed(object : Runnable {
             override fun run() {
                 moveObjects()
                 handler.postDelayed(this, 50)
             }
         }, 50)
-
         handler.postDelayed(object : Runnable {
             override fun run() {
                 respawnObjects()
@@ -117,7 +118,6 @@ class ARFragment : Fragment() {
     private fun respawnObjects() {
         modelNode.isVisible = false
         modelNodeNonSymmetric.isVisible = false
-
         handler.postDelayed({
             spawnObjects()
         }, 500)
@@ -136,7 +136,6 @@ class ARFragment : Fragment() {
         val deltaX = (random.nextFloat() - 0.5f) * 0.02f
         val deltaY = (random.nextFloat() - 0.5f) * 0.02f
         val deltaZ = (random.nextFloat() - 0.5f) * 0.02f
-
         val currentPosition = node.position
         node.position = Position(
             currentPosition.x + deltaX,
@@ -149,7 +148,6 @@ class ARFragment : Fragment() {
         val x = (random.nextFloat() - 0.5f) * 2f
         val y = (random.nextFloat() - 0.5f) * 2f
         val z = -random.nextFloat() * 2f - 1f
-
         node.position = Position(x, y, z)
     }
 
@@ -170,6 +168,8 @@ class ARFragment : Fragment() {
                 gameOverTextView.text = "Oyun Bitti\nSkorunuz: $score"
                 scoreTextView.visibility = View.GONE
                 livesTextView.visibility = View.GONE
+
+                saveShurikenToSharedPref()
             }
         }
     }
@@ -185,5 +185,13 @@ class ARFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         handler.removeCallbacksAndMessages(null)
+    }
+
+    private fun saveShurikenToSharedPref() {
+        val shurikenValue = score / 10
+        val prefs = requireActivity().getSharedPreferences("AppPreferences", Context.MODE_PRIVATE)
+        val editor = prefs.edit()
+        editor.putInt("shuriken", shurikenValue)
+        editor.apply()
     }
 }

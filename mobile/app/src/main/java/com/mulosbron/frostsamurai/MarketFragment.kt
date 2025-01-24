@@ -1,5 +1,6 @@
 package com.mulosbron.frostsamurai
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,8 +9,6 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.*
 
 class MarketFragment : Fragment() {
 
@@ -52,30 +51,13 @@ class MarketFragment : Fragment() {
             Toast.makeText(requireContext(), "Eğitim Paketi 2 satın alındı!", Toast.LENGTH_SHORT).show()
         }
 
-        fetchShurikenValue()
+        showShurikenFromSharedPref()
     }
 
-    private fun fetchShurikenValue() {
-        val currentUser = FirebaseAuth.getInstance().currentUser
-        if (currentUser != null) {
-            val userId = currentUser.uid
-            val dbRef = FirebaseDatabase.getInstance().getReference("Users")
-
-            dbRef.child(userId).child("shuriken").addValueEventListener(object : ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    val shurikenValue = snapshot.getValue(Int::class.java) ?: 0
-                    tvShurikenCount.text = "Shuriken: $shurikenValue"
-                }
-
-                override fun onCancelled(error: DatabaseError) {
-                    // Veriyi okurken hata alındığında
-                    Toast.makeText(requireContext(), "Shuriken değeri okunamadı.", Toast.LENGTH_SHORT).show()
-                }
-            })
-        } else {
-            // Kullanıcı giriş yapmamışsa
-            tvShurikenCount.text = "Shuriken: 0"
-        }
+    private fun showShurikenFromSharedPref() {
+        val prefs = requireActivity().getSharedPreferences("AppPreferences", Context.MODE_PRIVATE)
+        val shurikenValue = prefs.getInt("shuriken", 0)
+        tvShurikenCount.text = "Shuriken: $shurikenValue"
     }
 
     companion object {
