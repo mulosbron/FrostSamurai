@@ -1,91 +1,92 @@
 # Frost Samurai
 
-Android üzerinde çalışan AR temelli, eğitici, çocuklara yönelik bir oyun.
+## Overview
+An AR-based educational Android game designed for children, combining entertainment with learning through augmented reality experiences. Players catch snowflakes while avoiding tree branches, earning virtual currency (Shuriken) that can be used in an in-game marketplace.
 
-## Proje Detayları
+## Purpose
+To create an engaging educational platform that leverages AR technology to help children develop spatial intelligence and hand-eye coordination skills while learning about symmetric and asymmetric shapes.
 
-- **Platform**: Mobil (Android)
+### Key Objectives:
+- Provide an educational AR gaming experience for children
+- Develop visual-spatial intelligence through interactive play
+- Implement a reward system that encourages continued learning
+- Create a safe, child-friendly environment with parental controls
 
-- **Teknoloji**: AR, Kotlin
+## Scope
 
-## Haftalık İlerleme Raporları
+### Technology Stack:
+- **Mobile Development**: Android (Kotlin)
+- **AR Framework**: SceneView AR, Google ARCore
+- **Authentication**: Firebase Authentication
+- **Database**: Firebase
+- **Web**: HTML, CSS, JavaScript
+- **3D Models**: GLB format
 
-### 1. Hafta
+### Project Features:
+- AR-based gameplay with 3D objects
+- User authentication system
+- In-game currency (Shuriken) based on score
+- Virtual marketplace for purchasing educational content
+- Responsive web landing page
+- Educational packages for different learning levels
+- Symmetric and asymmetric shape recognition
 
-- Github ve [Trello](https://trello.com/b/WiveiuTL/frostsamurai) sayfaları oluşturuldu. 
+## Implementation
 
-- [İndirme sayfası](https://frostsamurai.com/) şablonu oluşturuldu.
+### Project Structure:
+```
+FrostSamurai/
+├── docs/                          # Project documentation
+│   ├── gereksinim analizi/       # Requirements analysis
+│   ├── swot/                     # SWOT analysis
+│   └── uml diyagramları/         # UML diagrams
+├── mobile/                       # Android application
+│   └── app/src/main/java/com/mulosbron/frostsamurai/
+│       ├── ARFragment.kt         # AR game logic
+│       ├── LoginFragment.kt      # User authentication
+│       ├── MarketFragment.kt     # In-game store
+│       └── MainActivity.kt       # Main activity
+├── web/                          # Landing page
+│   ├── index.html               # Homepage
+│   ├── cocuklar.html            # Children's section
+│   ├── ebeveynler.html          # Parents' section
+│   └── iletisim.html            # Contact page
+└── README.md
+```
 
-### 2. Hafta
+### Key Components:
+1. **AR Game (ARFragment.kt)**
+   - 3D object spawning and movement
+   - Score and lives system
+   - Touch interaction handling
+   - Shuriken currency calculation
 
-- [Akış çizelgesi](https://github.com/mulosbron/FrostSamurai/blob/main/docs/uml%20diyagramlar%C4%B1/aktivite%20diyagram%C4%B1.png) oluşturuldu.
+2. **Authentication (LoginFragment.kt)**
+   - Firebase email/password authentication
+   - User session management
+   - Auto-login functionality
 
-- SWOT analizine başlanıldı.
+3. **Marketplace (MarketFragment.kt)**
+   - Virtual currency display
+   - Educational package purchasing
+   - Symmetric/asymmetric shape unlocks
 
-### 3. Hafta
+4. **Web Interface**
+   - Child-friendly design
+   - Parent information section
+   - Responsive mobile layout
 
-- [SWOT analizi](https://github.com/mulosbron/FrostSamurai/blob/main/docs/swot/swot%20analizi.png) tamamlandı.
+### Development Process:
+1. **Planning Phase**: Requirements analysis, SWOT analysis
+2. **Design Phase**: UML diagrams, UI/UX design
+3. **Development Phase**: AR implementation, Firebase integration
+4. **Testing Phase**: User testing, performance optimization
+5. **Deployment Phase**: Play Store preparation, web hosting
 
-- Gereksinim analizine başlanıldı.
+## Screenshots
 
-### 4. Hafta
+### Game Screenshot
+<img width="500" alt="Game Screenshot" src="https://github.com/user-attachments/assets/b54b698f-f88d-4043-ad89-4d566fdf68f3">
 
-- [Gereksinim analizi](https://github.com/mulosbron/FrostSamurai/blob/main/docs/gereksinim%20analizi/gereksinim%20analizi.pdf) tamamlandı.
-
-- Diyagram çizimine başlandı.
-
-### 5. Hafta
-
-- [Diyagram](https://github.com/mulosbron/FrostSamurai/tree/main/docs/uml%20diyagramlar%C4%B1) çizimi büyük oranda tamamlandı.
-
-### 6. Hafta
-
-- [Login ve Register](https://github.com/mulosbron/FrostSamurai/tree/main/mobile/app/src/main/java/com/mulosbron/frostsamurai) fragmentleri eklendi.
-
-### 7. Hafta
-
-- [AR](https://github.com/mulosbron/FrostSamurai/blob/main/mobile/app/build/outputs/apk/debug/app-debug.apk) kodlanmasına başlanıldı.
-
-### Vize Sonrası
-
-- Login olmadan AR ekranı açılıyordu düzeltildi.
-- Markete göstermelik asimetrik ve simetrik eşya ekleme özelliği eklendi.
-- Gereksinim Analizi revize edildi.
-- Websitesinde değişiklikler yapıldı:
-  - Logo tasarlandı.
-  - Kış temasına uygun pastel tonlar kullanıldı.
-  - Çocuklar ve Ebeveynler için iki kısma ayrıldı.
-  - Web sitesi için mobil uyumluluk eklendi.
-- Uygulama kısmında login/register SharedPref. ile sağlanıyordu. Bunun yerine Firebase veritabanına geçildi. 
-- Mağaza kısmına göstermelik olarak eğitim paketleri eklendi. 
-- Oyun içi para sistemi eklenerek kullanıcının skoruna oranla para kazanması eklendi. 
-- İnstagram ve YouTube sayfaları açıldı. 
-
-## Ekran Görüntüleri
-
-<img width="500" alt="Ekran görüntüsü 2024-12-04 212545" src="https://github.com/user-attachments/assets/b54b698f-f88d-4043-ad89-4d566fdf68f3">
-
-![Screen_Recording_20241204_213117_FrostSamurai-ezgif com-optimize](https://github.com/user-attachments/assets/06a3669f-8a30-428a-8120-b9b82a48cd80)
-
-
-## İletişim
-
-- **Geliştirici:** mulosbron
-
-- **E-posta:** mulosbron@gmail.com
-
-- **Web Sitesi:** [Frost Samurai](https://frostsamurai.com/)
-
-## Kaynakça
-
-- [Görsel Uzmansal Zeka](https://mecokullari.k12.tr/tr-blog/gorsel-uzamsal-zeka-nedir)
-
-- [Gereksinim Analizi](https://github.com/wxinix/IEEE-29148-SRS-LaTeX-Template/blob/main/IEEE-29148-2018-SRS-Template.tex)
-
-- [Diyagramlar](https://creately.com/blog/diagrams/uml-diagram-types-examples/#CompStrDiagram)
-
-- [Diyagram Çizimi](https://plantuml.com/)
-
-- [AR](https://github.com/princeku07/AR-Furniture) 
-
-- [SHA256](https://developer.android.com/reference/java/security/MessageDigest)
+### AR Gameplay (GIF)
+<img src="https://github.com/user-attachments/assets/06a3669f-8a30-428a-8120-b9b82a48cd80" width="400" alt="AR Gameplay GIF" />
