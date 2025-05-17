@@ -6,12 +6,6 @@ An AR-based educational Android game designed for children, combining entertainm
 ## Purpose
 To create an engaging educational platform that leverages AR technology to help children develop spatial intelligence and hand-eye coordination skills while learning about symmetric and asymmetric shapes.
 
-### Key Objectives:
-- Provide an educational AR gaming experience for children
-- Develop visual-spatial intelligence through interactive play
-- Implement a reward system that encourages continued learning
-- Create a safe, child-friendly environment with parental controls
-
 ## Scope
 
 ### Technology Stack:
@@ -21,15 +15,6 @@ To create an engaging educational platform that leverages AR technology to help 
 - **Database**: Firebase
 - **Web**: HTML, CSS, JavaScript
 - **3D Models**: GLB format
-
-### Project Features:
-- AR-based gameplay with 3D objects
-- User authentication system
-- In-game currency (Shuriken) based on score
-- Virtual marketplace for purchasing educational content
-- Responsive web landing page
-- Educational packages for different learning levels
-- Symmetric and asymmetric shape recognition
 
 ## Implementation
 
@@ -53,35 +38,6 @@ FrostSamurai/
 │   └── iletisim.html            # Contact page
 └── README.md
 ```
-
-### Key Components:
-1. **AR Game (ARFragment.kt)**
-   - 3D object spawning and movement
-   - Score and lives system
-   - Touch interaction handling
-   - Shuriken currency calculation
-
-2. **Authentication (LoginFragment.kt)**
-   - Firebase email/password authentication
-   - User session management
-   - Auto-login functionality
-
-3. **Marketplace (MarketFragment.kt)**
-   - Virtual currency display
-   - Educational package purchasing
-   - Symmetric/asymmetric shape unlocks
-
-4. **Web Interface**
-   - Child-friendly design
-   - Parent information section
-   - Responsive mobile layout
-
-### Development Process:
-1. **Planning Phase**: Requirements analysis, SWOT analysis
-2. **Design Phase**: UML diagrams, UI/UX design
-3. **Development Phase**: AR implementation, Firebase integration
-4. **Testing Phase**: User testing, performance optimization
-5. **Deployment Phase**: Play Store preparation, web hosting
 
 ## Screenshots
 
